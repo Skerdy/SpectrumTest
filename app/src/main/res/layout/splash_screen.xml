@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:id="@+id/parent">
+
+
+    <com.hanks.htextview.scale.ScaleTextView
+        android:id="@+id/text_splash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:textAlignment="center"
+        android:textColor="@color/calendar_active_month_bg"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <com.hanks.htextview.fall.FallTextView
+        android:id="@+id/text_splash1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/calendar_active_month_bg"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:paddingTop="70dp"/>
+
+    <com.hanks.htextview.evaporate.EvaporateTextView
+        android:id="@+id/text_splash2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:textColor="@color/calendar_active_month_bg"
+        android:paddingTop="200dp"/>
+
+</RelativeLayout>
