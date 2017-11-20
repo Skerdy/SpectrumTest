@@ -1,9 +1,11 @@
 package com.example.user.spectrumtest.activities;
 
 import android.graphics.Path;
+import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.user.spectrumtest.R;
 import com.squareup.timessquare.CalendarPickerView;
@@ -15,7 +17,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Base_Nav_Activity {
     private List<Date> dates;
 
     @Override
@@ -59,5 +61,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    @Override
+    public boolean providesActivityToolbar() {
+        return true;
     }
 }
