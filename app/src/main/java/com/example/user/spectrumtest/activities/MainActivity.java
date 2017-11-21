@@ -35,9 +35,9 @@ public class MainActivity extends Base_Nav_Activity {
         CalendarPickerView calendar = (CalendarPickerView) findViewById(R.id.calendar_view);
         Date today = new Date();
 
-        gjeneroDate("20/11/2017");
-        gjeneroDate("21/11/2017");
         gjeneroDate("30/11/2017");
+        gjeneroDate("01/12/2017");
+        gjeneroDate("02/12/2017");
 
 
         calendar.init(today, nextYear.getTime())

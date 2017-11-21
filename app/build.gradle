@@ -29,6 +29,9 @@ dependencies {
     compile "com.hanks:htextview-fall:$htextview_version"
     compile "com.hanks:htextview-scale:$htextview_version"
     compile "com.hanks:htextview-evaporate:$htextview_version"
+    implementation 'com.github.stfalcon:chatkit:0.2.2'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+
 
     compile project(':library')
     compile 'com.android.support:appcompat-v7:26.+'
