@@ -8,12 +8,14 @@ class MonthDescriptor {
   private final int year;
   private final Date date;
   private String label;
+  private String tripLabel;
 
-  MonthDescriptor(int month, int year, Date date, String label) {
+  MonthDescriptor(int month, int year, Date date, String label, String tripLabel) {
     this.month = month;
     this.year = year;
     this.date = date;
     this.label = label;
+    this.tripLabel = tripLabel;
   }
 
   public int getMonth() {
@@ -32,8 +34,16 @@ class MonthDescriptor {
     return label;
   }
 
+  public String getTripLabel() {
+    return tripLabel;
+  }
+
   void setLabel(String label) {
     this.label = label;
+  }
+
+  void setTripLabel(String tripLabel){
+    this.tripLabel = tripLabel;
   }
 
   @Override public String toString() {
@@ -41,6 +51,8 @@ class MonthDescriptor {
         + "label='"
         + label
         + '\''
+            + ", tripLabel="
+            +tripLabel
         + ", month="
         + month
         + ", year="

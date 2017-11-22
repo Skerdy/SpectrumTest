@@ -3,4 +3,18 @@
     <color name="colorPrimary">#FFC400</color>
     <color name="colorPrimaryDark">#C79400</color>
     <color name="colorAccent">#212121</color>
+
+
+    <color name="event_color_01">#59dbe0</color>
+    <color name="event_color_02">#f57f68</color>
+    <color name="event_color_03">#87d288</color>
+    <color name="event_color_04">#f8b552</color>
+    <color name="toolbar">#efefef</color>
+    <color name="toolbar_text">#8f000000</color>
+    <color name="accent">#2789e4</color>
+
+    <color name="fab_menu_colorNormal">@color/colorPrimary</color>
+    <color name="fab_menu_colorPressed">@color/colorPrimaryDark</color>
+    <color name="fab_menu_colorRipple">#B3E5FC</color>
+    <color name="layout_background_underMonth">#fffde7</color>
 </resources>

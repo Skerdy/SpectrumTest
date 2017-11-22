@@ -41,8 +41,10 @@ int string invalid_date 0x7f070001
 int string month_name_format 0x7f070002
 int style CalendarCell 0x7f080000
 int style CalendarCell_CalendarDate 0x7f080001
-int style CalendarCell_DayHeader 0x7f080002
-int style CalendarTitle 0x7f080003
+int style CalendarCell_Calendartrip 0x7f080002
+int style CalendarCell_DayHeader 0x7f080003
+int style CalendarCellTrip 0x7f080004
+int style CalendarTitle 0x7f080005
 int[] styleable CalendarPickerView { 0x010100d4, 0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003, 0x7f010004, 0x7f010005, 0x7f01000d }
 int styleable CalendarPickerView_android_background 0
 int styleable CalendarPickerView_tsquare_dayBackground 1

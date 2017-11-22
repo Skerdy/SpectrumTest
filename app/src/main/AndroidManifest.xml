@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".Kalendar.Monthly_Kalendar"
+            android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
         <activity
@@ -39,6 +40,10 @@
             android:name=".activities.Chat"
             android:label="Chat"
             android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
+        <activity android:name=".Kalendar.KalendarActivity">
 
         </activity>
     </application>

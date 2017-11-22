@@ -31,6 +31,8 @@ dependencies {
     compile "com.hanks:htextview-evaporate:$htextview_version"
     implementation 'com.github.stfalcon:chatkit:0.2.2'
     implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.github.alamkanak:android-week-view:1.2.6'
+    implementation 'com.github.clans:fab:1.6.3'
 
 
     compile project(':library')

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -84,7 +85,8 @@ public class CalendarRowView extends ViewGroup implements View.OnClickListener {
       if (getChildAt(i) instanceof CalendarCellView) {
         CalendarCellView cell = ((CalendarCellView) getChildAt(i));
         cell.removeAllViews();
-        adapter.makeCellView(cell);
+        Log.d("Skerdi",  "" +cell.isHighlighted());
+        adapter.makeCellView(cell, i%2==0);
       }
     }
   }

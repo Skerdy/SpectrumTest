@@ -242,7 +242,7 @@ public class CalendarPickerView extends ListView {
       Date date = monthCounter.getTime();
       MonthDescriptor month =
               new MonthDescriptor(monthCounter.get(MONTH), monthCounter.get(YEAR), date,
-                      monthNameFormat.format(date));
+                      monthNameFormat.format(date), "Skerdi");
       cells.put(monthKey(month), getMonthCells(month, monthCounter));
       Logr.d("Adding month %s", month);
       months.add(month);
@@ -623,11 +623,11 @@ public class CalendarPickerView extends ListView {
 
   private void validateDate(Date date) {
     if (date == null) {
-      throw new IllegalArgumentException("Selected date must be non-null.");
+      throw new IllegalArgumentException("Data e zgjedhur nuk duhet te jete null");
     }
     if (date.before(minCal.getTime()) || date.after(maxCal.getTime())) {
       throw new IllegalArgumentException(String.format(
-              "SelectedDate must be between minDate and maxDate."
+              "Data e zgjedhur duhet te jete midis dates minimale dhe maksimale"
                       + "%nminDate: %s%nmaxDate: %s%nselectedDate: %s", minCal.getTime(), maxCal.getTime(),
               date));
     }
@@ -851,8 +851,7 @@ public class CalendarPickerView extends ListView {
       MonthView monthView = (MonthView) convertView;
       if (monthView == null //
               || !monthView.getTag(R.id.day_view_adapter_class).equals(dayViewAdapter.getClass())) {
-        monthView =
-                MonthView.create(parent, inflater, weekdayNameFormat, listener, today, dividerColor,
+        monthView = MonthView.create(parent, inflater, weekdayNameFormat, listener, today, dividerColor,
                         dayBackgroundResId, dayTextColorResId, titleTextStyle, displayHeader,
                         headerTextColor, displayDayNamesHeaderRow, decorators, locale, dayViewAdapter);
         monthView.setTag(R.id.day_view_adapter_class, dayViewAdapter.getClass());
@@ -896,6 +895,8 @@ public class CalendarPickerView extends ListView {
                 isCurrentMonth && betweenDates(cal, minCal, maxCal) && isDateSelectable(date);
         boolean isToday = sameDate(cal, today);
         boolean isHighlighted = containsDate(highlightedCals, cal);
+
+        //ketu merret data qe shkruhet ne kalendar
         int value = cal.get(DAY_OF_MONTH);
 
         RangeState rangeState = RangeState.NONE;
@@ -911,7 +912,7 @@ public class CalendarPickerView extends ListView {
 
         weekCells.add(
                 new MonthCellDescriptor(date, isCurrentMonth, isSelectable, isSelected, isToday,
-                        isHighlighted, value, rangeState));
+                        isHighlighted, value, rangeState, "Skerdi"));
         cal.add(DATE, 1);
       }
     }

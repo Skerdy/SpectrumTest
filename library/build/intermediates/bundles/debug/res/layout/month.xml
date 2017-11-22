@@ -4,8 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+    android:layout_height="wrap_content">
 
   <!-- This is the place where the month title is added -->
 
@@ -13,6 +12,7 @@
       android:id="@+id/calendar_grid"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:layout_marginTop="20dp"
       >
     <com.squareup.timessquare.CalendarRowView
         android:id="@+id/day_names_header_row"
@@ -63,4 +63,6 @@
     <include layout="@layout/week"/>
     <include layout="@layout/week"/>
   </com.squareup.timessquare.CalendarGridView>
+
+
 </com.squareup.timessquare.MonthView>

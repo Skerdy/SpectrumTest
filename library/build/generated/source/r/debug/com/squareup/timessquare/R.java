@@ -64,9 +64,11 @@ public final class R {
     }
     public static final class style {
         public static int CalendarCell = 0x7f160001;
-        public static int CalendarCell_CalendarDate = 0x7f160002;
-        public static int CalendarCell_DayHeader = 0x7f160003;
-        public static int CalendarTitle = 0x7f160004;
+        public static int CalendarCellTrip = 0x7f160002;
+        public static int CalendarCell_CalendarDate = 0x7f160003;
+        public static int CalendarCell_Calendartrip = 0x7f160004;
+        public static int CalendarCell_DayHeader = 0x7f160005;
+        public static int CalendarTitle = 0x7f160006;
     }
     public static final class styleable {
         public static int[] CalendarPickerView = { 0x010100d4, 0x7f040001, 0x7f040002, 0x7f040003, 0x7f040004, 0x7f040005, 0x7f040006, 0x7f04000e };

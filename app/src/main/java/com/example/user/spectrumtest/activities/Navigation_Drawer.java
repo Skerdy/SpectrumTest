@@ -14,6 +14,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.user.spectrumtest.Kalendar.KalendarActivity;
+import com.example.user.spectrumtest.Kalendar.Monthly_Kalendar;
 import com.example.user.spectrumtest.R;
 
 public class Navigation_Drawer extends AppCompatActivity
@@ -88,10 +90,9 @@ public class Navigation_Drawer extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_Kalendar) {
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, Monthly_Kalendar.class);
             startActivity(intent);
         }
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

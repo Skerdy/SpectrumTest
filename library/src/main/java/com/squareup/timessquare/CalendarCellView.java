@@ -36,6 +36,7 @@ public class CalendarCellView extends FrameLayout {
   private boolean isHighlighted = false;
   private RangeState rangeState = RangeState.NONE;
   private TextView dayOfMonthTextView;
+  private TextView tripText;
 
   @SuppressWarnings("UnusedDeclaration") //
   public CalendarCellView(Context context, AttributeSet attrs) {
@@ -129,6 +130,10 @@ public class CalendarCellView extends FrameLayout {
 
   public void setDayOfMonthTextView(TextView textView) {
     dayOfMonthTextView = textView;
+  }
+
+  public void setTripText(TextView textView){
+    tripText = textView;
   }
 
   public TextView getDayOfMonthTextView() {

@@ -128,9 +128,11 @@ public final class R {
   }
   public static final class style {
     public static final int CalendarCell=0x7f080000;
+    public static final int CalendarCellTrip=0x7f080004;
     public static final int CalendarCell_CalendarDate=0x7f080001;
-    public static final int CalendarCell_DayHeader=0x7f080002;
-    public static final int CalendarTitle=0x7f080003;
+    public static final int CalendarCell_Calendartrip=0x7f080002;
+    public static final int CalendarCell_DayHeader=0x7f080003;
+    public static final int CalendarTitle=0x7f080005;
   }
   public static final class styleable {
     /**
