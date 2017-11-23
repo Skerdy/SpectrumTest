@@ -11,13 +11,11 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.example.user.spectrumtest.R;
 import com.example.user.spectrumtest.activities.Base_Nav_Activity;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.squareup.timessquare.CalendarPickerView;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,6 +31,11 @@ public class Monthly_Kalendar extends Base_Nav_Activity {
     private int actual_position=0, scrollPosition=0;
     private Button prev, next;
 
+    //kalendar stuff
+    private Calendar kalendar_android;
+    private Date today;
+    private CalendarPickerView calendar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,20 +46,24 @@ public class Monthly_Kalendar extends Base_Nav_Activity {
 
         prev= (Button) findViewById(R.id.buton_prev);
         next = (Button) findViewById(R.id.buton_next);
-        Calendar nextYear = Calendar.getInstance();
-        nextYear.add(Calendar.YEAR, 1);
 
-        final CalendarPickerView calendar = (CalendarPickerView) findViewById(R.id.calendar_view);
-        Date today = new Date();
 
+        calendar = (CalendarPickerView) findViewById(R.id.calendar_view);
+        today = new Date();
+
+        kalendar_android = Calendar.getInstance();
+       // kalendar_android.add(Calendar.MONTH,0);
+        Log.d("Maksimum",""+ kalendar_android.getActualMaximum(Calendar.JULY));
+
+
+
+        displayCurrentMonth(kalendar_android);
+
+        /*
         gjeneroDate("30/11/2017");
         gjeneroDate("01/12/2017");
         gjeneroDate("02/12/2017");
-
-        calendar.init(today, nextYear.getTime())
-                .inMode(CalendarPickerView.SelectionMode.SINGLE);
-        calendar.highlightDates(dates);
-
+        */
 
         calendar.setOnDateSelectedListener(new CalendarPickerView.OnDateSelectedListener() {
             @Override
@@ -151,10 +158,13 @@ public class Monthly_Kalendar extends Base_Nav_Activity {
 
         } catch (ParseException e) {
             e.printStackTrace();
-
         }
+   }
 
-
+    private void displayCurrentMonth(Calendar month_time){
+        calendar.init(today, month_time.getTime())
+                .inMode(CalendarPickerView.SelectionMode.SINGLE);
+        calendar.highlightDates(dates);
     }
 
     @Override

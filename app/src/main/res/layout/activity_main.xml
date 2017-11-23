@@ -14,8 +14,7 @@
 
         android:id="@+id/calendar_view"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.66"
+        android:layout_height="wrap_content"
         tools:layout_editor_absoluteY="8dp"
         tools:layout_editor_absoluteX="8dp" />
 
@@ -23,8 +22,7 @@
         android:id="@+id/legjenda"
         android:layout_width="match_parent"
         android:orientation="vertical"
-        android:layout_height="0dp"
-        android:layout_weight="1.34"
+        android:layout_height="wrap_content"
         android:background="@color/layout_background_underMonth">
 
         <LinearLayout
@@ -35,6 +33,7 @@
                 android:id="@+id/buton_prev"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:layout_weight="1"
                 android:text="Prev"/>
 
@@ -42,6 +41,7 @@
                 android:id="@+id/buton_next"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:layout_weight="1"
                 android:text="Next"/>
 

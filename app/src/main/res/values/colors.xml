@@ -17,4 +17,12 @@
     <color name="fab_menu_colorPressed">@color/colorPrimaryDark</color>
     <color name="fab_menu_colorRipple">#B3E5FC</color>
     <color name="layout_background_underMonth">#fffde7</color>
+
+    <color name="menu_calendar">#13B0A5</color>
+    <color name="menu_trips">#F1B136</color>
+    <color name="menu_chat">#EB6562</color>
+    <color name="menu_travel_area">#3372E3</color>
+    <color name="menu_calendar_pressed">#1A9682</color>
+
+
 </resources>
