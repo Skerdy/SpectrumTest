@@ -1,5 +1,6 @@
 package com.example.user.spectrumtest.Kalendar;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Path;
 import android.support.design.widget.NavigationView;
@@ -7,10 +8,16 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.user.spectrumtest.CustomListeners.OnSwipeTouchListener;
 import com.example.user.spectrumtest.R;
 import com.example.user.spectrumtest.activities.Base_Nav_Activity;
 import com.github.clans.fab.FloatingActionButton;
@@ -29,35 +36,37 @@ public class Monthly_Kalendar extends Base_Nav_Activity {
     private List<Date> dates;
     private List<Fragment> fragments = new ArrayList<>();
     private int actual_position=0, scrollPosition=0;
-    private Button prev, next;
+    private ImageButton prev, next;
+    private FrameLayout frameLayout;
+    private final int ROLL_CALENDAR_UP=1;
+    private final int ROLL_CALENDAR_DOWN=2;
+
 
     //kalendar stuff
     private Calendar kalendar_android;
     private Date today;
     private CalendarPickerView calendar;
+    private int CurrentMonth, todayMonth, CurrentYear, todayYear;
+    private Date lastGeneratedDate;
 
+
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        dates=new ArrayList<Date>();
+        frameLayout =(FrameLayout) findViewById(R.id.canvasMonth);
+        dates = new ArrayList<Date>();
 
 
-        prev= (Button) findViewById(R.id.buton_prev);
-        next = (Button) findViewById(R.id.buton_next);
+        prev = (ImageButton) findViewById(R.id.buton_prev);
+        next = (ImageButton) findViewById(R.id.buton_next);
 
 
         calendar = (CalendarPickerView) findViewById(R.id.calendar_view);
-        today = new Date();
 
-        kalendar_android = Calendar.getInstance();
-       // kalendar_android.add(Calendar.MONTH,0);
-        Log.d("Maksimum",""+ kalendar_android.getActualMaximum(Calendar.JULY));
-
-
-
-        displayCurrentMonth(kalendar_android);
+        initCalendarToday();
 
         /*
         gjeneroDate("30/11/2017");
@@ -68,7 +77,7 @@ public class Monthly_Kalendar extends Base_Nav_Activity {
         calendar.setOnDateSelectedListener(new CalendarPickerView.OnDateSelectedListener() {
             @Override
             public void onDateSelected(Date date) {
-                Log.d("Skerdi","Klik done");
+                Log.d("Skerdi", "Klik done");
                 Intent intent = new Intent(Monthly_Kalendar.this, KalendarActivity.class);
                 intent.putExtra("ViewMode", 1);
                 startActivity(intent);
@@ -90,33 +99,67 @@ public class Monthly_Kalendar extends Base_Nav_Activity {
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
-                Log.d("DetajetScroll", ""+firstVisibleItem+visibleItemCount+ " Total " +totalItemCount + " Scroll X = " + calendar.getScrollX()+ " Scroll Y = "+calendar.getScrollY() );
+                Log.d("DetajetScroll", "" + firstVisibleItem + visibleItemCount + " Total " + totalItemCount + " Scroll X = " + calendar.getScrollX() + " Scroll Y = " + calendar.getScrollY());
             }
         });
 
         prev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(actual_position==0)
+                rollCalendar(ROLL_CALENDAR_DOWN, lastGeneratedDate);
+               /* if(actual_position==0)
                     scrollPosition=0;
                 else
                     scrollPosition=actual_position-1;
                 calendar.smoothScrollToPositionFromTop(scrollPosition,2);
                 actual_position--;
+                */
             }
         });
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(actual_position==12)
+                rollCalendar(ROLL_CALENDAR_UP, lastGeneratedDate);
+
+               /* if(actual_position==12)
                     scrollPosition=12;
                 else
                     scrollPosition=actual_position+1;
                 calendar.smoothScrollToPositionFromTop(scrollPosition,2);
                 actual_position++;
+                */
             }
         });
 
+
+        calendar.setOnTouchListener(new OnSwipeTouchListener(Monthly_Kalendar.this) {
+            public void onSwipeTop() {
+            }
+            public void onSwipeRight() {
+                rollCalendar(ROLL_CALENDAR_DOWN, lastGeneratedDate);
+            }
+            public void onSwipeLeft() {
+                rollCalendar(ROLL_CALENDAR_UP, lastGeneratedDate);
+            }
+            public void onSwipeBottom() {
+            }
+
+        });
+
+
+        frameLayout.setOnTouchListener(new OnSwipeTouchListener(Monthly_Kalendar.this) {
+            public void onSwipeTop() {
+            }
+            public void onSwipeRight() {
+                rollCalendar(ROLL_CALENDAR_DOWN, lastGeneratedDate);
+            }
+            public void onSwipeLeft() {
+                rollCalendar(ROLL_CALENDAR_UP, lastGeneratedDate);
+            }
+            public void onSwipeBottom() {
+            }
+
+        });
 
 
 
@@ -148,7 +191,9 @@ public class Monthly_Kalendar extends Base_Nav_Activity {
 
     }
 
-    private void gjeneroDate(String data){
+
+
+    private  void gjeneroDate(String data){
 
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -161,11 +206,140 @@ public class Monthly_Kalendar extends Base_Nav_Activity {
         }
    }
 
-    private void displayCurrentMonth(Calendar month_time){
-        calendar.init(today, month_time.getTime())
+    private void displayCurrentMonth(Date startingDate, Calendar month_time){
+        calendar.init(startingDate, month_time.getTime())
                 .inMode(CalendarPickerView.SelectionMode.SINGLE);
         calendar.highlightDates(dates);
     }
+
+    private Calendar fetchCalendarDates(Date startingDay){
+        Calendar kalendar = Calendar.getInstance();
+        Calendar cal = Calendar.getInstance();
+        kalendar.setTime(startingDay);
+        cal.setTime(startingDay);
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        int deltaDate = kalendar.getActualMaximum(Calendar.DAY_OF_MONTH)-day + 1 ;
+
+        Log.d("Data Sot", " "+ day +" "+ year + " delta Date = "+ deltaDate);
+        kalendar.add(Calendar.DATE,deltaDate);
+        return kalendar;
+    }
+
+    private int getMonthFromDate(Date date){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        return month;
+    }
+
+    private int getYearFromDate(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        return year;
+    }
+
+
+    private void rollCalendar(int parameterRollCalendar, Date lastGeneratedDate){
+        Calendar cal = Calendar.getInstance();
+
+        cal.setTime(lastGeneratedDate);
+        int year = cal.get(Calendar.YEAR);
+        CurrentYear = year;
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        if(parameterRollCalendar==ROLL_CALENDAR_UP){
+           // kalendar_android = Calendar.getInstance()
+            if(CurrentMonth+1!=todayMonth){
+                simulateMoveMonth(parameterRollCalendar);
+            }
+            else{
+                if( CurrentYear != todayYear){
+                    simulateMoveMonth(parameterRollCalendar);
+                }
+                else {
+                    initCalendarToday();
+                }
+
+            }
+        }
+        else{
+            if(CurrentMonth-1!=todayMonth){
+                simulateMoveMonth(parameterRollCalendar);
+            }
+            else{
+                if(CurrentYear != todayYear){
+                    simulateMoveMonth(parameterRollCalendar);
+                }
+                else{
+                    initCalendarToday();
+                }
+            }
+
+
+        }
+    }
+
+
+    private Date krijoDate (int Viti, int muaji, int dita){
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, Viti);
+        calendar.set(Calendar.MONTH, muaji);
+        calendar.set(Calendar.DATE, dita);
+        Date date = calendar.getTime();
+        return date;
+
+    }
+
+    private void simulateMoveMonth(int param){
+        Calendar workingCal;
+        if(param==ROLL_CALENDAR_UP) {
+            if (CurrentMonth == 11) {
+                ++CurrentYear;
+                CurrentMonth = -1;
+            }
+            Date nextMonthFirstDate = krijoDate(CurrentYear, CurrentMonth + 1, 1);
+            lastGeneratedDate = nextMonthFirstDate;
+            Log.d("Data e muajit tjeter", nextMonthFirstDate.toString());
+            workingCal = fetchCalendarDates(nextMonthFirstDate);
+            displayCurrentMonth(nextMonthFirstDate, workingCal);
+            CurrentMonth++;
+        }
+        else {
+            if(CurrentMonth==0){
+                --CurrentYear;
+                CurrentMonth=12;
+            }
+            Date nextMonthFirstDate = krijoDate(CurrentYear,CurrentMonth-1,1);
+            lastGeneratedDate= nextMonthFirstDate;
+            Log.d("Data e muajit tjeter" , nextMonthFirstDate.toString());
+            workingCal = fetchCalendarDates(nextMonthFirstDate);
+            displayCurrentMonth(nextMonthFirstDate,workingCal);
+            CurrentMonth--;
+
+        }
+    }
+
+    private void initCalendarToday(){
+        today = new Date();
+        lastGeneratedDate=today;
+        todayMonth = getMonthFromDate(today);
+        CurrentMonth=todayMonth;
+        todayYear = getYearFromDate(today);
+
+        Log.d("Current Month ", " "+CurrentMonth);
+
+        kalendar_android = fetchCalendarDates(today);
+        displayCurrentMonth(today, kalendar_android);
+    }
+
+
 
     @Override
     public boolean providesActivityToolbar() {

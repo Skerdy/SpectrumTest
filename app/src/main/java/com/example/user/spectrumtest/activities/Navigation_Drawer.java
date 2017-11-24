@@ -57,17 +57,10 @@ public class Navigation_Drawer extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         menu_kalendar = (CardView) findViewById(R.id.menu_kalendar);
-        menu_kalendar.setCardBackgroundColor(getColor(R.color.menu_calendar));
-
         menu_chat = (CardView) findViewById(R.id.menu_chat);
-        menu_chat.setCardBackgroundColor(getResources().getColor(R.color.menu_chat));
-
         menu_trips = (CardView) findViewById(R.id.menu_trips);
-        menu_trips.setCardBackgroundColor(getResources().getColor(R.color.menu_trips));
-
         menu_travel_area = (CardView) findViewById(R.id.menu_travel);
-        menu_travel_area.setCardBackgroundColor(getResources().getColor(R.color.menu_travel_area));
-
+        setupMenuButtonColors();
         menu_kalendar.setOnClickListener(this);
         menu_chat.setOnClickListener(this);
         menu_trips.setOnClickListener(this);
@@ -80,10 +73,7 @@ public class Navigation_Drawer extends AppCompatActivity
     @Override
     protected void onStart() {
         super.onStart();
-        menu_kalendar.setCardBackgroundColor(getColor(R.color.menu_calendar));
-        menu_chat.setCardBackgroundColor(getResources().getColor(R.color.menu_chat));
-        menu_trips.setCardBackgroundColor(getResources().getColor(R.color.menu_trips));
-        menu_travel_area.setCardBackgroundColor(getResources().getColor(R.color.menu_travel_area));
+        setupMenuButtonColors();
     }
 
     @Override
@@ -139,7 +129,7 @@ public class Navigation_Drawer extends AppCompatActivity
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.menu_kalendar:
-                menu_kalendar.setCardBackgroundColor(getColor(R.color. menu_calendar_pressed));
+                menu_kalendar.setCardBackgroundColor(getResources().getColor(R.color. menu_calendar_pressed));
                 Intent intent = new Intent(this, Monthly_Kalendar.class);
                 startActivity(intent);
                 break;
@@ -148,5 +138,13 @@ public class Navigation_Drawer extends AppCompatActivity
                 startActivity(intent1);
                 break;
         }
+    }
+
+
+    public void setupMenuButtonColors(){
+        menu_kalendar.setCardBackgroundColor(getResources().getColor(R.color.menu_calendar));
+        menu_chat.setCardBackgroundColor(getResources().getColor(R.color.menu_chat));
+        menu_trips.setCardBackgroundColor(getResources().getColor(R.color.menu_trips));
+        menu_travel_area.setCardBackgroundColor(getResources().getColor(R.color.menu_travel_area));
     }
 }

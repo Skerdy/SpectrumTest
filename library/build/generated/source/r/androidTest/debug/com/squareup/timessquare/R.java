@@ -52,6 +52,7 @@ public final class R {
         public static final int calendar_grid = 0x7f050000;
         public static final int day_names_header_row = 0x7f050001;
         public static final int day_view_adapter_class = 0x7f050002;
+        public static final int monthViewLibrary = 0x7f050003;
     }
     public static final class layout {
         public static final int month = 0x7f060000;

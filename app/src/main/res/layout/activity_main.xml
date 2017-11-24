@@ -5,13 +5,30 @@
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.user.spectrumtest.Kalendar.Monthly_Kalendar">
-<LinearLayout
+    tools:context="com.example.user.spectrumtest.Kalendar.Monthly_Kalendar"
+    android:id="@+id/canvasMonth">
+
+    <ImageButton
+        android:id="@+id/buton_prev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|start"
+        android:elevation="4dp"
+        fab:srcCompat="@drawable/right" />
+
+    <ImageButton
+        android:id="@+id/buton_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:elevation="4dp"
+        fab:srcCompat="@drawable/left" />
+
+    <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
     <com.squareup.timessquare.CalendarPickerView
-
         android:id="@+id/calendar_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,30 +39,8 @@
         android:id="@+id/legjenda"
         android:layout_width="match_parent"
         android:orientation="vertical"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@color/layout_background_underMonth">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/buton_prev"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_weight="1"
-                android:text="Prev"/>
-
-            <Button
-                android:id="@+id/buton_next"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_weight="1"
-                android:text="Next"/>
-
-        </LinearLayout>
 
     </LinearLayout>
 </LinearLayout>
@@ -58,7 +53,7 @@
         android:layout_gravity="bottom|end"
         android:elevation="4dp"
         android:paddingBottom="16dp"
-        android:paddingRight="16dp"
+        android:paddingEnd="16dp"
         fab:menu_backgroundColor="#ccffffff"
         fab:menu_colorNormal="@color/fab_menu_colorNormal"
         fab:menu_colorPressed="@color/fab_menu_colorPressed"
